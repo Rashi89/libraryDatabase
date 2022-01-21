@@ -1,7 +1,7 @@
 package pl.agata.commands;
 
 import pl.agata.controller.BooksController;
-import pl.agata.controller.CommendController;
+import pl.agata.controller.CommandController;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -23,8 +23,8 @@ public class CreateOption extends Command {
             type = scanner.nextLine().toLowerCase(Locale.ROOT);
 
             BooksController booksController = new BooksController();
-            CommendController commendController = new CommendController();
-            commendController.createHelpBookOption();
+            CommandController commandController = new CommandController();
+            commandController.createHelpBookOption();
             booksController.createAlbum(1, "album", "A", "B", "C", 2022);
             booksController.createComic(1, "comics", "A", "B", "C", 2022);
             booksController.createFairystyle(1, "fairytale", "A", "B", "C", 2022);
@@ -42,8 +42,8 @@ public class CreateOption extends Command {
             }
             else if(type.equals("help")){
                 try{
-                    commendController.getOption(type);
-                    commendController.getOption(type).execute();
+                    commandController.getOption(type);
+                    commandController.getOption(type).execute();
                 } catch (NullPointerException e){
                     System.out.println("Coś poszło nie tak!");
                 }

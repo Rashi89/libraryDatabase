@@ -5,11 +5,11 @@ import pl.agata.commands.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommendController {
+public class CommandController {
 
     private final List<Command> commands;
 
-    public CommendController() {
+    public CommandController() {
         this.commands = new ArrayList<>();
     }
 

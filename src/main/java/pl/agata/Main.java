@@ -1,6 +1,6 @@
 package pl.agata;
 
-import pl.agata.controller.CommendController;
+import pl.agata.controller.CommandController;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -15,13 +15,13 @@ public class Main {
 
     private static void runMenu() {
         String option;
-        CommendController commendController = new CommendController();
-        commendController.createCreateOption();
-        commendController.createDeleteOption();
-        commendController.createEditOption();
-        commendController.createFindOption();
-        commendController.createHelpOption();
-        commendController.createNoneOption();
+        CommandController commandController = new CommandController();
+        commandController.createCreateOption();
+        commandController.createDeleteOption();
+        commandController.createEditOption();
+        commandController.createFindOption();
+        commandController.createHelpOption();
+        commandController.createNoneOption();
 
         do{
             System.out.println("Witaj w lubelskiej bibliotece!");
@@ -32,8 +32,8 @@ public class Main {
 
             if(!option.equals("exit")) {
                 try{
-                    commendController.getOption(option);
-                    commendController.getOption(option).execute();
+                    commandController.getOption(option);
+                    commandController.getOption(option).execute();
                 } catch(NullPointerException e){
                     System.out.println("Wpisz 'help' jeśli chcesz uzyskać pomoc.");
                 }
