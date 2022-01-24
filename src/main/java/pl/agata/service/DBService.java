@@ -47,6 +47,8 @@ public class DBService {
             statement.executeUpdate(sql);
         } else if(sql.startsWith("DELETE")){
             statement.executeUpdate(sql);
+        } else if(sql.startsWith("UPDATE")){
+            statement.executeUpdate(sql);
         }
     }
 

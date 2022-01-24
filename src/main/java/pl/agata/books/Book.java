@@ -21,6 +21,10 @@ public abstract class Book {
         this.publicationDate = publicationDate;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public void info(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj autora książki: ");
@@ -35,6 +39,12 @@ public abstract class Book {
     public String addToBase(){
         String string = "INSERT INTO books (`id`, `type`, `title`, `author`, `publisher`, `publication_year`) " +
                 "VALUES('"+id+"','"+type+"','"+title+"','"+author+"','"+publisher+"',"+publicationDate+")";
+        return string;
+    }
+
+    public String updateToBase(){
+        String string = "UPDATE books SET id="+id+", type='"+type+"', title='"+title+"', author='"+author+"', publisher='"+
+                publisher+"',publication_year="+publicationDate+" WHERE id="+id;
         return string;
     }
 
