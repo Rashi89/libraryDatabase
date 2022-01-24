@@ -1,7 +1,10 @@
 package pl.agata;
 
 import pl.agata.controller.CommandController;
+import pl.agata.database.DataSource;
 
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -9,7 +12,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        runMenu();
+        try(Statement statement = DataSource.getConnection().createStatement()) {
+
+            statement.executeUpdate("INSERT INTO users(id,name,surname) VALUES (6,'Aga','Ra')");
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } ;
+
+        //runMenu();
 
     }
 
