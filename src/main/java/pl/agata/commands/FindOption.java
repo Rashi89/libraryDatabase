@@ -1,14 +1,9 @@
 package pl.agata.commands;
 
-import pl.agata.books.Book;
 import pl.agata.controller.BooksController;
-import pl.agata.controller.CommandController;
 import pl.agata.service.DBService;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class FindOption extends Command {

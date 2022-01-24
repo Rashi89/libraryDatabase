@@ -2,8 +2,6 @@ package pl.agata;
 
 import pl.agata.controller.CommandController;
 import pl.agata.service.DBService;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Scanner;
@@ -16,18 +14,10 @@ public class Main {
 
             DBService.init();
             runMenu();
-//            ResultSet resultSet = DBService.query("SELECT id FROM users");
-//            while(resultSet.next()){
-//                int id = resultSet.getInt("id");
-//                System.out.println(String.format("ID: %d%n",id));
-//            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-//        runMenu();
 
     }
 
