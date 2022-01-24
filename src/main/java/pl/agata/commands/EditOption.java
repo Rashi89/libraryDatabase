@@ -21,15 +21,15 @@ public class EditOption extends Command {
         String type="";
         BooksController booksController = new BooksController();
         booksController.createAlbum(1, "album", "A", "B", "C", 2022);
-        booksController.createComic(1, "comics", "A", "B", "C", 2022);
-        booksController.createFairystyle(1, "fairytale", "A", "B", "C", 2022);
-        booksController.createGuide(1, "guide", "A", "B", "C", 2022);
-        booksController.createScience(1, "science", "A", "B", "C", 2022);
+        booksController.createComic(2, "comics", "A", "B", "C", 2022);
+        booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022);
+        booksController.createGuide(4, "guide", "A", "B", "C", 2022);
+        booksController.createScience(5, "science", "A", "B", "C", 2022);
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj tytuł książki którą chcesz edytować: ");
         title = scanner.nextLine();
-
+        int idType = 0;
         ResultSet resultSet = DBService.query("SELECT COUNT(title),id,type FROM `books` WHERE title ='"+title+"';");
         while(resultSet.next()){
             int quantity = resultSet.getInt("COUNT(title)");
@@ -40,13 +40,30 @@ public class EditOption extends Command {
             else {
                 id = resultSet.getInt("id");
                 type = resultSet.getString("type");
+                idType = convertTypeToInt(type);
             }
-            booksController.getBook(type).setType(type);
-            booksController.getBook(type).setId(id);
-            booksController.getBook(type).info();
-            System.out.println(booksController.getBook(type).updateToBase());
+            booksController.getBook(idType).setType(type);
+            booksController.getBook(idType).info();
+            booksController.getBook(idType).setId(id);
         }
-        DBService.dml(booksController.getBook(type).updateToBase());
+        DBService.dml(booksController.getBook(idType).updateToBase());
         System.out.println();
+    }
+
+    private int convertTypeToInt(String type){
+        switch(type){
+            case "album":
+                return 1;
+            case "comic":
+                return 2;
+            case "fairytale":
+                return 3;
+            case "guide":
+                return 4;
+            case "science":
+                return 5;
+            default:
+                return 0;
+        }
     }
 }

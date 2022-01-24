@@ -24,27 +24,28 @@ public class CreateOption extends Command {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Podaj typ książki: ");
             type = scanner.nextLine().toLowerCase(Locale.ROOT);
-
+            int id =0;
+            int idType = convertTypeToInt(type);
             BooksController booksController = new BooksController();
             CommandController commandController = new CommandController();
             commandController.createHelpBookOption();
             booksController.createAlbum(1, "album", "A", "B", "C", 2022);
-            booksController.createComic(1, "comics", "A", "B", "C", 2022);
-            booksController.createFairystyle(1, "fairytale", "A", "B", "C", 2022);
-            booksController.createGuide(1, "guide", "A", "B", "C", 2022);
-            booksController.createScience(1, "science", "A", "B", "C", 2022);
+            booksController.createComic(2, "comics", "A", "B", "C", 2022);
+            booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022);
+            booksController.createGuide(4, "guide", "A", "B", "C", 2022);
+            booksController.createScience(5, "science", "A", "B", "C", 2022);
 
             if(!type.equals("exit")&&!type.equals("help")) {
                 try{
-                    booksController.getBook(type);
-                    booksController.getBook(type).info();
+                    booksController.getBook(idType);
+                    booksController.getBook(idType).info();
                     ResultSet resultSet = DBService.query("SELECT MAX(id) FROM `books`;");
                     while(resultSet.next()){
-                        int id = resultSet.getInt("MAX(id)")+1;
-                        booksController.getBook(type).setId(id);
+                        id = resultSet.getInt("MAX(id)")+1;
+                        booksController.getBook(idType).setId(id);
                     }
-                    DBService.dml(booksController.getBook(type).addToBase());
-                    System.out.println(booksController.getBook(type).toString());
+                    DBService.dml(booksController.getBook(id).addToBase());
+                    System.out.println(booksController.getBook(id).toString());
                 } catch(NullPointerException e){
                     System.out.println("Wpisz 'help' jeśli chcesz uzyskać pomoc.");
                 } catch (SQLException e) {
@@ -64,6 +65,23 @@ public class CreateOption extends Command {
             else if(type.equals("exit")){
                 run = false;
             }
+        }
+    }
+
+    private int convertTypeToInt(String type){
+        switch(type){
+            case "album":
+                return 1;
+            case "comic":
+                return 2;
+            case "fairytale":
+                return 3;
+            case "guide":
+                return 4;
+            case "science":
+                return 5;
+            default:
+                return 0;
         }
     }
 }

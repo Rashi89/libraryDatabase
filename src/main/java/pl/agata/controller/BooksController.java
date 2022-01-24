@@ -50,9 +50,9 @@ public class BooksController {
         this.books.removeIf(book -> book.getId() == id);
     }
 
-    public Book getBook(String name){
+    public Book getBook(int id){
         for(Book book: this.books){
-            if(book.getType().equals(name)){
+            if(book.getId() == id){
                 return book;
             }
         }
@@ -63,4 +63,5 @@ public class BooksController {
         String string = "DELETE FROM books WHERE id="+num;
         return string;
     }
+
 }

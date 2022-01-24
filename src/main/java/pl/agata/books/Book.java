@@ -96,6 +96,15 @@ public abstract class Book {
         return type;
     }
 
+    public void setInformation(int id, String type, String author, String title, String publisher, int publicationDate, int pages){
+        this.id = id;
+        this.author = author;
+        this.title = title;
+        this.publisher = publisher;
+        this.type = type;
+        this.publicationDate = publicationDate;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
