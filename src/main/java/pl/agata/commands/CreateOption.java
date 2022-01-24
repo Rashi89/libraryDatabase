@@ -2,7 +2,10 @@ package pl.agata.commands;
 
 import pl.agata.controller.BooksController;
 import pl.agata.controller.CommandController;
+import pl.agata.service.DBService;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -35,9 +38,17 @@ public class CreateOption extends Command {
                 try{
                     booksController.getBook(type);
                     booksController.getBook(type).info();
+                    ResultSet resultSet = DBService.query("SELECT MAX(id) FROM `books`;");
+                    while(resultSet.next()){
+                        int id = resultSet.getInt("MAX(id)")+1;
+                        booksController.getBook(type).setId(id);
+                    }
+                    DBService.dml(booksController.getBook(type).addToBase());
                     System.out.println(booksController.getBook(type).toString());
                 } catch(NullPointerException e){
                     System.out.println("Wpisz 'help' jeśli chcesz uzyskać pomoc.");
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
             else if(type.equals("help")){
@@ -46,6 +57,8 @@ public class CreateOption extends Command {
                     commandController.getOption(type).execute();
                 } catch (NullPointerException e){
                     System.out.println("Coś poszło nie tak!");
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
             else if(type.equals("exit")){

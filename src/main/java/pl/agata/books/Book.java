@@ -32,6 +32,12 @@ public abstract class Book {
         validatePublicationDate();
     }
 
+    public String addToBase(){
+        String string = "INSERT INTO books (`id`, `type`, `title`, `author`, `publisher`, `publication_year`) " +
+                "VALUES('"+id+"','"+type+"','"+title+"','"+author+"','"+publisher+"',"+publicationDate+")";
+        return string;
+    }
+
     private void validatePublicationDate() {
         try {
             Scanner scanner = new Scanner(System.in);
@@ -70,6 +76,10 @@ public abstract class Book {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getType() {

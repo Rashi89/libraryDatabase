@@ -1,28 +1,33 @@
 package pl.agata;
 
 import pl.agata.controller.CommandController;
-import pl.agata.database.DataSource;
+import pl.agata.service.DBService;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
-        try(Statement statement = DataSource.getConnection().createStatement()) {
+        try {
 
-            statement.executeUpdate("INSERT INTO users(id,name,surname) VALUES (6,'Aga','Ra')");
-
-
+            DBService.init();
+            runMenu();
+//            ResultSet resultSet = DBService.query("SELECT id FROM users");
+//            while(resultSet.next()){
+//                int id = resultSet.getInt("id");
+//                System.out.println(String.format("ID: %d%n",id));
+//            }
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } ;
+        }
 
-        //runMenu();
+
+//        runMenu();
 
     }
 
@@ -49,6 +54,8 @@ public class Main {
                     commandController.getOption(option).execute();
                 } catch(NullPointerException e){
                     System.out.println("Wpisz 'help' jeśli chcesz uzyskać pomoc.");
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         } while(!option.equals("exit"));

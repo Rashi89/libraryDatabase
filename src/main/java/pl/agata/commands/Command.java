@@ -1,5 +1,7 @@
 package pl.agata.commands;
 
+import java.sql.SQLException;
+
 public abstract class Command {
 
     protected String nameOption;
@@ -8,7 +10,7 @@ public abstract class Command {
         this.nameOption = nameOption;
     }
 
-    public abstract void execute();
+    public abstract void execute() throws SQLException;
 
     public String getNameOption() {
         return nameOption;
