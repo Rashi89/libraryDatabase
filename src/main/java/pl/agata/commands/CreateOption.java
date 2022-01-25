@@ -45,7 +45,7 @@ public class CreateOption extends Command {
                         booksController.getBook(idType).setId(id);
                     }
                     DBService.dml(booksController.getBook(id).addToBase());
-                    System.out.println(booksController.getBook(id).toString());
+                    run = false;
                 } catch(NullPointerException e){
                     System.out.println("Wpisz 'help' jeśli chcesz uzyskać pomoc.");
                 } catch (SQLException e) {

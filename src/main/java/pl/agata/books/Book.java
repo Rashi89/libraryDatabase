@@ -43,7 +43,7 @@ public abstract class Book {
     }
 
     public String updateToBase(){
-        String string = "UPDATE books SET id="+id+", type='"+type+"', title='"+title+"', author='"+author+"', publisher='"+
+        String string = "UPDATE books SET type='"+type+"', title='"+title+"', author='"+author+"', publisher='"+
                 publisher+"',publication_year="+publicationDate+" WHERE id="+id;
         return string;
     }

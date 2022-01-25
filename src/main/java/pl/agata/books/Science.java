@@ -63,6 +63,7 @@ public class Science extends Book{
     public String toString() {
         return "Science{" +
                 "id=" + id +
+                ", type='" + type + '\'' +
                 ", author='" + author + '\'' +
                 ", title='" + title + '\'' +
                 ", publisher='" + publisher + '\'' +

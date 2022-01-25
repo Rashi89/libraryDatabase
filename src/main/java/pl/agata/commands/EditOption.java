@@ -20,11 +20,7 @@ public class EditOption extends Command {
         int id =0;
         String type="";
         BooksController booksController = new BooksController();
-        booksController.createAlbum(1, "album", "A", "B", "C", 2022);
-        booksController.createComic(2, "comics", "A", "B", "C", 2022);
-        booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022);
-        booksController.createGuide(4, "guide", "A", "B", "C", 2022);
-        booksController.createScience(5, "science", "A", "B", "C", 2022);
+
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj tytuł książki którą chcesz edytować: ");
@@ -32,21 +28,28 @@ public class EditOption extends Command {
         int idType = 0;
         ResultSet resultSet = DBService.query("SELECT COUNT(title),id,type FROM `books` WHERE title ='"+title+"';");
         while(resultSet.next()){
+
             int quantity = resultSet.getInt("COUNT(title)");
             if(quantity == 0){
                 System.out.println("Nie ma takej pozycji w bazie");
                 break;
             }
             else {
+                booksController.createAlbum(1, "album", "A", "B", "C", 2022);
+                booksController.createComic(2, "comics", "A", "B", "C", 2022);
+                booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022);
+                booksController.createGuide(4, "guide", "A", "B", "C", 2022);
+                booksController.createScience(5, "science", "A", "B", "C", 2022);
                 id = resultSet.getInt("id");
                 type = resultSet.getString("type");
                 idType = convertTypeToInt(type);
+                booksController.getBook(idType).setType(type);
+                booksController.getBook(idType).info();
+                booksController.getBook(idType).setId(id);
             }
-            booksController.getBook(idType).setType(type);
-            booksController.getBook(idType).info();
-            booksController.getBook(idType).setId(id);
+
         }
-        DBService.dml(booksController.getBook(idType).updateToBase());
+        DBService.dml(booksController.getBook(id).updateToBase());
         System.out.println();
     }
 
