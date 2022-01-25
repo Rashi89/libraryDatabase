@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 public class EditOption extends Command {
     public String title;
+    public String author;
+    public String publisher;
+    public int publicationDate;
 
     public EditOption() {
         super("edit");
@@ -26,8 +29,16 @@ public class EditOption extends Command {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj tytuł książki którą chcesz edytować: ");
         title = scanner.nextLine();
+        System.out.print("Podaj autora książki którą chcesz edytować: ");
+        author = scanner.nextLine();
+        System.out.print("Podaj wydawce książki którą chcesz edytować: ");
+        publisher = scanner.nextLine();
+        System.out.print("Podaj rok wydania książki którą chcesz edytować: ");
+        publicationDate = scanner.nextInt();
+
         int idType = 0;
-        ResultSet resultSet = dbService.query("SELECT COUNT(title),id,type FROM `books` WHERE title ='"+title+"';");
+        ResultSet resultSet = dbService.query("SELECT COUNT(title),id,type FROM `books` WHERE title ='"+title+"' " +
+                "AND author='"+author+"' AND publication_year="+publicationDate+";");
         while(resultSet.next()){
 
             int quantity = resultSet.getInt("COUNT(title)");
@@ -48,7 +59,6 @@ public class EditOption extends Command {
                 booksController.getBook(idType).info();
                 booksController.getBook(idType).setId(id);
             }
-
         }
         dbService.dml(booksController.getBook(id).updateToBase());
         System.out.println();
@@ -58,7 +68,7 @@ public class EditOption extends Command {
         switch(type){
             case "album":
                 return 1;
-            case "comic":
+            case "comics":
                 return 2;
             case "fairytale":
                 return 3;

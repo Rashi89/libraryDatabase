@@ -74,7 +74,7 @@ public class CreateOption extends Command {
         switch(type){
             case "album":
                 return 1;
-            case "comic":
+            case "comics":
                 return 2;
             case "fairytale":
                 return 3;
