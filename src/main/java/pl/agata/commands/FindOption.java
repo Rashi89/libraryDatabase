@@ -59,7 +59,6 @@ public class FindOption extends Command {
                     idType = convertTypeToInt(type);
 
                     booksController.getBook(idType).setInformation(id,type,option,title,publisher,publication_year,pages);
-
                     System.out.println(booksController.getBook(id).toString());
 
                 }
@@ -70,7 +69,7 @@ public class FindOption extends Command {
         switch(type){
             case "album":
                 return 1;
-            case "comic":
+            case "comics":
                 return 2;
             case "fairytale":
                 return 3;
