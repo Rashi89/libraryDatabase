@@ -18,6 +18,8 @@ public class DeleteOption extends Command {
     @Override
     public void execute() throws SQLException {
         BooksController booksController = new BooksController();
+        DBService dbService = new DBService();
+        dbService.init();
         int id=0;
         String type="";
         int quantity = 0;
@@ -25,7 +27,7 @@ public class DeleteOption extends Command {
         System.out.print("Podaj tytuł książki do usunięcia: ");
         title = scanner.nextLine();
 
-        ResultSet resultSet = DBService.query("SELECT COUNT(title) FROM `books` WHERE title ='"+title+"';");
+        ResultSet resultSet = dbService.query("SELECT COUNT(title) FROM `books` WHERE title ='"+title+"';");
         while(resultSet.next()){
             quantity = resultSet.getInt("COUNT(title)");
             if(quantity == 0){
@@ -36,11 +38,11 @@ public class DeleteOption extends Command {
         resultSet.close();
         if(quantity!=0){
             for(int i=0; i<quantity;i++) {
-                ResultSet resultSetId = DBService.query(("SELECT id FROM `books` WHERE title ='" + title + "';"));
+                ResultSet resultSetId = dbService.query(("SELECT id FROM `books` WHERE title ='" + title + "';"));
                 while (resultSetId.next()) {
                     id = resultSetId.getInt("id");
                 }
-                DBService.dml(booksController.removeToBase(id));
+                dbService.dml(booksController.removeToBase(id));
                 resultSetId.close();
             }
         }

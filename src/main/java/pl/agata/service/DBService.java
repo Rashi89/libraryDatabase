@@ -12,7 +12,7 @@ public class DBService {
 
     private static HikariConfig config = new HikariConfig();
     private static HikariDataSource ds;
-    private static Statement statement;
+    private  Statement statement;
 
     static {
         config.setJdbcUrl( "jdbc:mysql://localhost/library" );
@@ -30,18 +30,18 @@ public class DBService {
         return ds.getConnection();
     }
 
-    public static Statement init() throws SQLException {
+    public Statement init() throws SQLException {
         Statement statementInit = DBService.getConnection().createStatement();
-        statement = statementInit;
+        this.statement = statementInit;
         return statement;
     }
 
-    public static ResultSet query(String sql) throws SQLException {
-        ResultSet resultSet = statement.executeQuery(sql);
+    public ResultSet query(String sql) throws SQLException {
+        ResultSet resultSet = this.statement.executeQuery(sql);
         return resultSet;
     }
 
-    public static void dml(String sql) throws SQLException {
+    public void dml(String sql) throws SQLException {
 
         if(sql.startsWith("INSERT")){
             statement.executeUpdate(sql);

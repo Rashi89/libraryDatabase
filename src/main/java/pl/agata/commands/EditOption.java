@@ -16,7 +16,8 @@ public class EditOption extends Command {
 
     @Override
     public void execute() throws SQLException {
-
+        DBService dbService = new DBService();
+        dbService.init();
         int id =0;
         String type="";
         BooksController booksController = new BooksController();
@@ -26,7 +27,7 @@ public class EditOption extends Command {
         System.out.print("Podaj tytuł książki którą chcesz edytować: ");
         title = scanner.nextLine();
         int idType = 0;
-        ResultSet resultSet = DBService.query("SELECT COUNT(title),id,type FROM `books` WHERE title ='"+title+"';");
+        ResultSet resultSet = dbService.query("SELECT COUNT(title),id,type FROM `books` WHERE title ='"+title+"';");
         while(resultSet.next()){
 
             int quantity = resultSet.getInt("COUNT(title)");
@@ -49,7 +50,7 @@ public class EditOption extends Command {
             }
 
         }
-        DBService.dml(booksController.getBook(id).updateToBase());
+        dbService.dml(booksController.getBook(id).updateToBase());
         System.out.println();
     }
 

@@ -17,6 +17,8 @@ public class FindOption extends Command {
     @Override
     public void execute() throws SQLException {
         BooksController booksController = new BooksController();
+        DBService dbService = new DBService();
+        dbService.init();
         int id =0;
         int idType = 0;
         String type = "";
@@ -30,7 +32,7 @@ public class FindOption extends Command {
         System.out.print("Podaj autora: ");
         option = scanner.nextLine();
 
-        ResultSet resultSet = DBService.query("SELECT COUNT(author) FROM `books` WHERE author ='"+option+"';");
+        ResultSet resultSet = dbService.query("SELECT COUNT(author) FROM `books` WHERE author ='"+option+"';");
 
         while(resultSet.next()) {
             quantity = resultSet.getInt("COUNT(author)");
@@ -42,7 +44,7 @@ public class FindOption extends Command {
         resultSet.close();
         if(quantity!=0)
              {
-                ResultSet resultSetInfo = DBService.query("SELECT id, type, title, publisher, publication_year, pages FROM `books` WHERE author ='"+option+"';");
+                ResultSet resultSetInfo = dbService.query("SELECT id, type, title, publisher, publication_year, pages FROM `books` WHERE author ='"+option+"';");
                 while(resultSetInfo.next()){
                     booksController.createAlbum(1, "album", "A", "B", "C", 2022);
                     booksController.createComic(2, "comics", "A", "B", "C", 2022);

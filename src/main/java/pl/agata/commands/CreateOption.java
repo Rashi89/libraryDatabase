@@ -18,9 +18,11 @@ public class CreateOption extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws SQLException {
         boolean run = true;
         while (run) {
+            DBService dbService = new DBService();
+            dbService.init();
             Scanner scanner = new Scanner(System.in);
             System.out.print("Podaj typ książki: ");
             type = scanner.nextLine().toLowerCase(Locale.ROOT);
@@ -39,12 +41,12 @@ public class CreateOption extends Command {
                 try{
                     booksController.getBook(idType);
                     booksController.getBook(idType).info();
-                    ResultSet resultSet = DBService.query("SELECT MAX(id) FROM `books`;");
+                    ResultSet resultSet = dbService.query("SELECT MAX(id) FROM `books`;");
                     while(resultSet.next()){
                         id = resultSet.getInt("MAX(id)")+1;
                         booksController.getBook(idType).setId(id);
                     }
-                    DBService.dml(booksController.getBook(id).addToBase());
+                    dbService.dml(booksController.getBook(id).addToBase());
                     run = false;
                 } catch(NullPointerException e){
                     System.out.println("Wpisz 'help' jeśli chcesz uzyskać pomoc.");

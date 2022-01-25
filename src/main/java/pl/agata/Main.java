@@ -10,14 +10,11 @@ public class Main {
 
     public static void main(String[] args){
 
-        try {
 
-            DBService.init();
+//            DBService dbService = new DBService();
+//            dbService.init();
             runMenu();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
     }
 
