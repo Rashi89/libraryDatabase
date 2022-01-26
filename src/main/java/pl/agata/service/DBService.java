@@ -57,11 +57,11 @@ public class DBService {
         BooksController booksController = new BooksController();
         ResultSet resultSet = query("SELECT * FROM `books`");
         while(resultSet.next()){
-            booksController.createAlbum(1, "album", "A", "B", "C", 2022);
-            booksController.createComic(2, "comics", "A", "B", "C", 2022);
-            booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022);
-            booksController.createGuide(4, "guide", "A", "B", "C", 2022);
-            booksController.createScience(5, "science", "A", "B", "C", 2022);
+            booksController.createAlbum(1, "album", "A", "B", "C", 2022,1);
+            booksController.createComic(2, "comics", "A", "B", "C", 2022,1);
+            booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022,1);
+            booksController.createGuide(4, "guide", "A", "B", "C", 2022,1);
+            booksController.createScience(5, "science", "A", "B", "C", 2022,1);
 
             int id = resultSet.getInt("id");
             String type = resultSet.getString("type");
@@ -70,9 +70,10 @@ public class DBService {
             String  author = resultSet.getString("author");
             int publication_year = resultSet.getInt("publication_year");
             int pages = resultSet.getInt("pages");
+            int quantity = resultSet.getInt("quantity");
             int idType = convertTypeToInt(type);
 
-            booksController.getBook(idType).setInformation(id,type,author,title,publisher,publication_year,pages);
+            booksController.getBook(idType).setInformation(id,type,author,title,publisher,publication_year,pages,quantity);
             System.out.println(booksController.getBook(id).toString());
 
         }

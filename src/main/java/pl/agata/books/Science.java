@@ -7,8 +7,8 @@ public class Science extends Book{
 
     private int numberOfPages;
 
-    public Science(int id,String type, String author, String title, String publisher, int publicationDate) {
-        super(id, type, author, title, publisher, publicationDate);
+    public Science(int id,String type, String author, String title, String publisher, int publicationDate,int quantity) {
+        super(id, type, author, title, publisher, publicationDate,quantity);
     }
 
     public void setNumberOfPages(int numberOfPages) {
@@ -49,13 +49,14 @@ public class Science extends Book{
     }
 
     @Override
-    public void setInformation(int id, String type, String author, String title, String publisher, int publicationDate,int pages){
+    public void setInformation(int id, String type, String author, String title, String publisher, int publicationDate,int pages,int quantity){
         this.id = id;
         this.author = author;
         this.title = title;
         this.publisher = publisher;
         this.type = type;
         this.publicationDate = publicationDate;
+        this.quantity = quantity;
         setNumberOfPages(pages);
     }
 
@@ -67,7 +68,8 @@ public class Science extends Book{
                 ", author='" + author + '\'' +
                 ", title='" + title + '\'' +
                 ", publisher='" + publisher + '\'' +
-                ", publicationDate=" + publicationDate +
+                ", publicationDate=" + publicationDate +'\''+
+                ", quantity=" + quantity +'\''+
                 ", numberOfPages=" + numberOfPages +
                 '}';
     }

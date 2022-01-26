@@ -16,32 +16,32 @@ public class BooksController {
         this.books = new ArrayList<>();
     }
 
-    public Book createAlbum(int id, String type, String author, String title, String publisher, int publicationDate) {
-        Book book = new Albums(id,type,author,title,publisher,publicationDate);
+    public Book createAlbum(int id, String type, String author, String title, String publisher, int publicationDate,int quantity) {
+        Book book = new Albums(id,type,author,title,publisher,publicationDate,quantity);
         this.books.add(book);
         return book;
     }
 
-    public Book createComic(int id, String type, String author, String title, String publisher, int publicationDate){
-        Book book = new Comics(id,type,author,title,publisher,publicationDate);
+    public Book createComic(int id, String type, String author, String title, String publisher, int publicationDate,int quantity){
+        Book book = new Comics(id,type,author,title,publisher,publicationDate,quantity);
         this.books.add(book);
         return book;
     }
 
-    public Book createFairystyle(int id, String type, String author, String title, String publisher, int publicationDate){
-        Book book = new Fairytales(id,type,author,title,publisher,publicationDate);
+    public Book createFairystyle(int id, String type, String author, String title, String publisher, int publicationDate,int quantity){
+        Book book = new Fairytales(id,type,author,title,publisher,publicationDate,quantity);
         this.books.add(book);
         return book;
     }
 
-    public Book createGuide(int id, String type, String author, String title, String publisher, int publicationDate){
-        Book book = new Guides(id,type,author,title,publisher,publicationDate);
+    public Book createGuide(int id, String type, String author, String title, String publisher, int publicationDate,int quantity){
+        Book book = new Guides(id,type,author,title,publisher,publicationDate,quantity);
         this.books.add(book);
         return book;
     }
 
-    public Book createScience(int id, String type, String author, String title, String publisher, int publicationDate){
-        Book book = new Science(id,type,author,title,publisher,publicationDate);
+    public Book createScience(int id, String type, String author, String title, String publisher, int publicationDate,int quantity){
+        Book book = new Science(id,type,author,title,publisher,publicationDate,quantity);
         this.books.add(book);
         return book;
     }

@@ -27,6 +27,9 @@ public class FindOption extends Command {
         int publication_year = 0;
         int pages = 0;
         int quantity = 0;
+        int bookQuantity =0;
+
+//        dbService.select();//dadaj do repozytorium to jedyna zmiana
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj autora: ");
@@ -44,13 +47,13 @@ public class FindOption extends Command {
         resultSet.close();
         if(quantity!=0)
              {
-                ResultSet resultSetInfo = dbService.query("SELECT id, type, title, publisher, publication_year, pages FROM `books` WHERE author ='"+option+"';");
+                ResultSet resultSetInfo = dbService.query("SELECT id, type, title, publisher, publication_year, pages,quantity FROM `books` WHERE author ='"+option+"';");
                 while(resultSetInfo.next()){
-                    booksController.createAlbum(1, "album", "A", "B", "C", 2022);
-                    booksController.createComic(2, "comics", "A", "B", "C", 2022);
-                    booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022);
-                    booksController.createGuide(4, "guide", "A", "B", "C", 2022);
-                    booksController.createScience(5, "science", "A", "B", "C", 2022);
+                    booksController.createAlbum(1, "album", "A", "B", "C", 2022,1);
+                    booksController.createComic(2, "comics", "A", "B", "C", 2022,1);
+                    booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022,1);
+                    booksController.createGuide(4, "guide", "A", "B", "C", 2022,1);
+                    booksController.createScience(5, "science", "A", "B", "C", 2022,1);
 
                     id = resultSetInfo.getInt("id");
                     type = resultSetInfo.getString("type");
@@ -58,9 +61,10 @@ public class FindOption extends Command {
                     publisher = resultSetInfo.getString("publisher");
                     publication_year = resultSetInfo.getInt("publication_year");
                     pages = resultSetInfo.getInt("pages");
+                    bookQuantity = resultSetInfo.getInt("quantity");
                     idType = convertTypeToInt(type);
 
-                    booksController.getBook(idType).setInformation(id,type,option,title,publisher,publication_year,pages);
+                    booksController.getBook(idType).setInformation(id,type,option,title,publisher,publication_year,pages,bookQuantity);
                     System.out.println(booksController.getBook(id).toString());
 
                 }
