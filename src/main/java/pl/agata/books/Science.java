@@ -43,8 +43,8 @@ public class Science extends Book{
 
     @Override
     public String addToBase(){
-        String string = "INSERT INTO books (`id`, `type`, `title`, `author`, `publisher`, `publication_year`,`pages` ) " +
-                "VALUES('"+id+"','"+type+"','"+title+"','"+author+"','"+publisher+"',"+publicationDate+","+numberOfPages+")";
+        String string = "INSERT INTO books (`id`, `type`, `title`, `author`, `publisher`, `publication_year`,`pages`, `quantity` ) " +
+                "VALUES('"+id+"','"+type+"','"+title+"','"+author+"','"+publisher+"',"+publicationDate+","+numberOfPages+","+quantity+");";
         return string;
     }
 

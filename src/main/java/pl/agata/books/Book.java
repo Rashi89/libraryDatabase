@@ -41,7 +41,7 @@ public abstract class Book {
 
     public String addToBase(){
         String string = "INSERT INTO books (`id`, `type`, `title`, `author`, `publisher`, `publication_year`, `quantity`) " +
-                "VALUES('"+id+"','"+type+"','"+title+"','"+author+"','"+publisher+"',"+publicationDate+","+quantity+")";
+                "VALUES('"+id+"','"+type+"','"+title+"','"+author+"','"+publisher+"',"+publicationDate+","+quantity+");";
         return string;
     }
 

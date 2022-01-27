@@ -18,9 +18,9 @@ public class EditOption extends Command {
     }
 
     @Override
-    public void execute() throws SQLException {
-        DBService dbService = new DBService();
-        dbService.init();
+    public void execute(DBService dbService) throws SQLException {
+//        DBService dbService = new DBService();
+//        dbService.init();
         int id =0;
         String type="";
         BooksController booksController = new BooksController();

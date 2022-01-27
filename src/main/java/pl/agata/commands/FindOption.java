@@ -15,10 +15,10 @@ public class FindOption extends Command {
     }
 
     @Override
-    public void execute() throws SQLException {
+    public void execute(DBService dbService) throws SQLException {
         BooksController booksController = new BooksController();
-        DBService dbService = new DBService();
-        dbService.init();
+//        DBService dbService = new DBService();
+//        dbService.init();
         int id =0;
         int idType = 0;
         String type = "";

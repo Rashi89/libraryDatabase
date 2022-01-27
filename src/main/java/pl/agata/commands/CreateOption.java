@@ -18,18 +18,18 @@ public class CreateOption extends Command {
     }
 
     @Override
-    public void execute() throws SQLException {
+    public void execute(DBService dbService) throws SQLException {
         boolean run = true;
         while (run) {
-            DBService dbService = new DBService();
-            dbService.init();
+//            DBService dbService = new DBService();
+//            dbService.init();
             Scanner scanner = new Scanner(System.in);
             System.out.print("Podaj typ książki: ");
             type = scanner.nextLine().toLowerCase(Locale.ROOT);
             int id =0;
             int idType = convertTypeToInt(type);
             BooksController booksController = new BooksController();
-            CommandController commandController = new CommandController();
+            CommandController commandController = new CommandController(dbService);
             commandController.createHelpBookOption();
             booksController.createAlbum(1, "album", "A", "B", "C", 2022,1);
             booksController.createComic(2, "comics", "A", "B", "C", 2022,1);
@@ -57,10 +57,11 @@ public class CreateOption extends Command {
             else if(type.equals("help")){
                 try{
                     commandController.getOption(type);
-                    commandController.getOption(type).execute();
+                    commandController.getOption(type).execute(dbService);
                 } catch (NullPointerException e){
                     System.out.println("Coś poszło nie tak!");
-                } catch (SQLException e) {
+                }
+                catch (SQLException e) {
                     e.printStackTrace();
                 }
             }

@@ -9,18 +9,19 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args){
-
-
-//            DBService dbService = new DBService();
-//            dbService.init();
+        
+        try {
             runMenu();
-
-
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    private static void runMenu() {
+    private static void runMenu() throws SQLException {
+        DBService dbService = new DBService("jdbc:mysql://localhost/library","root","");
+        dbService.configure();
         String option;
-        CommandController commandController = new CommandController();
+        CommandController commandController = new CommandController(dbService);
         commandController.createCreateOption();
         commandController.createDeleteOption();
         commandController.createEditOption();
@@ -38,7 +39,7 @@ public class Main {
             if(!option.equals("exit")) {
                 try{
                     commandController.getOption(option);
-                    commandController.getOption(option).execute();
+                    commandController.getOption(option).execute(dbService);
                 } catch(NullPointerException e){
                     System.out.println("Wpisz 'help' jeśli chcesz uzyskać pomoc.");
                 } catch (SQLException e) {
