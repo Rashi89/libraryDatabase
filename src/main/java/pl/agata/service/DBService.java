@@ -28,12 +28,12 @@ public class DBService {
         config.setJdbcUrl( jbcUrl );
         config.setUsername( userName );
         config.setPassword( password );
-//        config.addDataSourceProperty( "cachePrepStmts" , "true" );
-//        config.addDataSourceProperty( "prepStmtCacheSize" , "250" );
-//        config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
+        config.addDataSourceProperty( "cachePrepStmts" , "true" );
+        config.addDataSourceProperty( "prepStmtCacheSize" , "250" );
+        config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
         this.ds = new HikariDataSource( config );
-        getConnection();
-        init();
+        //getConnection();
+//        init();
     }
 
     private Connection getConnection() throws SQLException {
@@ -46,19 +46,19 @@ public class DBService {
         return statement;
     }
 
-    public ResultSet query(String sql) throws SQLException {
-        ResultSet resultSet = this.statement.executeQuery(sql);
-        return resultSet;
+    public ResultSet query(String sql) {
+        try(Connection connection = ds.getConnection()){
+            return this.statement.executeQuery(sql);
+        }catch(SQLException exception){
+            throw new IllegalStateException(exception);
+        }
     }
 
     public void dml(String sql) throws SQLException {
-
-        if(sql.startsWith("INSERT")){
+        try(Connection connection = ds.getConnection()){
             statement.executeUpdate(sql);
-        } else if(sql.startsWith("DELETE")){
-            statement.executeUpdate(sql);
-        } else if(sql.startsWith("UPDATE")){
-            statement.executeUpdate(sql);
+        }catch(SQLException exception){
+            throw new IllegalStateException(exception);
         }
     }
 

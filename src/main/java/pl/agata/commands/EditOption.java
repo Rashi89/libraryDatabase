@@ -37,6 +37,7 @@ public class EditOption extends Command {
         publicationDate = scanner.nextInt();
 
         int idType = 0;
+        dbService.init();
         ResultSet resultSet = dbService.query("SELECT COUNT(title),id,type FROM `books` WHERE title ='"+title+"' " +
                 "AND author='"+author+"' AND publication_year="+publicationDate+";");
         while(resultSet.next()){

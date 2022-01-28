@@ -34,7 +34,7 @@ public class FindOption extends Command {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj autora: ");
         option = scanner.nextLine();
-
+        dbService.init();
         ResultSet resultSet = dbService.query("SELECT COUNT(author) FROM `books` WHERE author ='"+option+"';");
 
         while(resultSet.next()) {
@@ -44,9 +44,10 @@ public class FindOption extends Command {
                 break;
             }
         }
-        resultSet.close();
+        //resultSet.close();
         if(quantity!=0)
              {
+                 dbService.init();
                 ResultSet resultSetInfo = dbService.query("SELECT id, type, title, publisher, publication_year, pages,quantity FROM `books` WHERE author ='"+option+"';");
                 while(resultSetInfo.next()){
                     booksController.createAlbum(1, "album", "A", "B", "C", 2022,1);

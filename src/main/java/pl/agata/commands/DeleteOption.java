@@ -26,7 +26,7 @@ public class DeleteOption extends Command {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj tytuł książki do usunięcia: ");
         title = scanner.nextLine();
-
+        dbService.init();
         ResultSet resultSet = dbService.query("SELECT COUNT(title) FROM `books` WHERE title ='"+title+"';");
         while(resultSet.next()){
             quantity = resultSet.getInt("COUNT(title)");
@@ -35,7 +35,6 @@ public class DeleteOption extends Command {
                 break;
             }
         }
-        resultSet.close();
         if(quantity!=0){
             for(int i=0; i<quantity;i++) {
                 ResultSet resultSetId = dbService.query(("SELECT id FROM `books` WHERE title ='" + title + "';"));
@@ -43,7 +42,6 @@ public class DeleteOption extends Command {
                     id = resultSetId.getInt("id");
                 }
                 dbService.dml(booksController.removeToBase(id));
-                resultSetId.close();
             }
         }
         System.out.println();

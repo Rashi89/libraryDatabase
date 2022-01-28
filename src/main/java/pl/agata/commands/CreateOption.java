@@ -22,7 +22,7 @@ public class CreateOption extends Command {
         boolean run = true;
         while (run) {
 //            DBService dbService = new DBService();
-//            dbService.init();
+            //dbService.init();
             Scanner scanner = new Scanner(System.in);
             System.out.print("Podaj typ książki: ");
             type = scanner.nextLine().toLowerCase(Locale.ROOT);
@@ -39,6 +39,7 @@ public class CreateOption extends Command {
 
             if(!type.equals("exit")&&!type.equals("help")) {
                 try{
+                    dbService.init();
                     booksController.getBook(idType);
                     booksController.getBook(idType).info();
                     ResultSet resultSet = dbService.query("SELECT MAX(id) FROM `books`;");
