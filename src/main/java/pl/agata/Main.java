@@ -1,6 +1,7 @@
 package pl.agata;
 
 import pl.agata.controller.CommandController;
+import pl.agata.service.BookService;
 import pl.agata.service.DBService;
 import pl.agata.service.UserService;
 import pl.agata.user.User;
@@ -24,9 +25,11 @@ public class Main {
     private static void runUser() throws SQLException {
         DBService dbService = new DBService("jdbc:mysql://localhost/library","root","");
         dbService.configure();
-        UserService userService = new UserService(dbService);
+        //BookService bookService = new BookService(dbService);
+        //bookService.showInfo();
+        //UserService userService = new UserService(dbService);
         //userService.createUser();
-        userService.loginUser();
+        //userService.loginUser();
 
     }
 

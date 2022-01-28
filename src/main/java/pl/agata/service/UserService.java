@@ -30,7 +30,7 @@ public class UserService {
         surname = scanner.nextLine();
         System.out.println("Podaj password!");
         pass = scanner.nextLine();
-        User user = new User(name,surname,pass);
+        user = new User(name,surname,pass);
         int quantity=0;
         dbService.init();
         ResultSet resultSet = dbService.query("SELECT COUNT(*) FROM `users` u WHERE u.name='"+user.getName()+
@@ -66,7 +66,7 @@ public class UserService {
         surname = scanner.nextLine();
         System.out.println("Podaj password!");
         pass = scanner.nextLine();
-        User user = new User(name,surname,pass);
+        user = new User(name,surname,pass);
         int id=0;
         dbService.init();
         ResultSet resultSet = dbService.query("SELECT id FROM `users` u WHERE u.name='"+user.getName()+
