@@ -71,14 +71,14 @@ public class UserService {
         dbService.init();
         ResultSet resultSet = dbService.query("SELECT id FROM `users` u WHERE u.name='"+user.getName()+
                 "' AND u.surname='"+user.getUsername()+"' AND u.password='"+user.getPassword()+"';");
-        while(resultSet.next()) {
+        if(resultSet.next()) {
             id = resultSet.getInt("id");
             user.setId(id);
             users.add(user);
             System.out.println("Jesteś zalogowany");
             return user;
         }
-        if(id==0){
+        else {
             System.out.println("Błędny login lub hasło!");
         }
         return null;

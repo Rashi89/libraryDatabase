@@ -25,8 +25,8 @@ public class Main {
     private static void runUser() throws SQLException {
         DBService dbService = new DBService("jdbc:mysql://localhost/library","root","");
         dbService.configure();
-        //BookService bookService = new BookService(dbService);
-        //bookService.showInfo();
+        BookService bookService = new BookService(dbService);
+        bookService.showInfo();
         //UserService userService = new UserService(dbService);
         //userService.createUser();
         //userService.loginUser();
