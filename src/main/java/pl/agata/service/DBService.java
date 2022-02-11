@@ -13,10 +13,11 @@ public class DBService {
 
     private HikariConfig config = new HikariConfig();
     private HikariDataSource ds;
-    private Statement statement;
     private String jbcUrl;
     private String userName;
     private String password;
+    private Statement statement;
+    private Connection connection;
 
     public DBService(String jbcUrl,String userName,String password) {
         this.jbcUrl = jbcUrl;
@@ -40,15 +41,13 @@ public class DBService {
         return this.ds.getConnection();
     }
 
-    public Statement init() throws SQLException {
-        Statement statementInit = getConnection().createStatement();
-        this.statement = statementInit;
-        return statement;
-    }
 
     public ResultSet query(String sql) {
-        try(Connection connection = ds.getConnection()){
-            return this.statement.executeQuery(sql);
+        try{
+            connection = ds.getConnection();
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+            return result;
         }catch(SQLException exception){
             throw new IllegalStateException(exception);
         }
@@ -56,21 +55,37 @@ public class DBService {
 
     public void dml(String sql) throws SQLException {
         try(Connection connection = ds.getConnection()){
+            statement = connection.createStatement();
             statement.executeUpdate(sql);
+            statement.close();
         }catch(SQLException exception){
             throw new IllegalStateException(exception);
         }
+    }
+
+    public void closeStatement() throws SQLException {
+        if(statement != null && !statement.isClosed()){
+            statement.close();
+        }
+
+        if(connection != null && !connection.isClosed()){
+            connection.close();
+        }
+    }
+
+    public void closeConnection() throws SQLException {
+        this.ds.getConnection().close();
     }
 
     public void select() throws SQLException {
         BooksController booksController = new BooksController();
         ResultSet resultSet = query("SELECT * FROM `books`");
         while(resultSet.next()){
-            booksController.createAlbum(1, "album", "A", "B", "C", 2022,1);
-            booksController.createComic(2, "comics", "A", "B", "C", 2022,1);
-            booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022,1);
-            booksController.createGuide(4, "guide", "A", "B", "C", 2022,1);
-            booksController.createScience(5, "science", "A", "B", "C", 2022,1);
+            booksController.createAlbum(1, "album", "A", "B", "C", 2022,1,"");
+            booksController.createComic(2, "comics", "A", "B", "C", 2022,1,"");
+            booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022,1,"");
+            booksController.createGuide(4, "guide", "A", "B", "C", 2022,1,"");
+            booksController.createScience(5, "science", "A", "B", "C", 2022,1,"");
 
             int id = resultSet.getInt("id");
             String type = resultSet.getString("type");
@@ -81,8 +96,9 @@ public class DBService {
             int pages = resultSet.getInt("pages");
             int quantity = resultSet.getInt("quantity");
             int idType = convertTypeToInt(type);
+            String description = resultSet.getString("description");
 
-            booksController.getBook(idType).setInformation(id,type,author,title,publisher,publication_year,pages,quantity);
+            booksController.getBook(idType).setInformation(id,type,author,title,publisher,publication_year,pages,quantity,description);
             System.out.println(booksController.getBook(id).toString());
 
         }

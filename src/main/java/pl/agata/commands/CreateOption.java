@@ -31,15 +31,15 @@ public class CreateOption extends Command {
             BooksController booksController = new BooksController();
             CommandController commandController = new CommandController(dbService);
             commandController.createHelpBookOption();
-            booksController.createAlbum(1, "album", "A", "B", "C", 2022,1);
-            booksController.createComic(2, "comics", "A", "B", "C", 2022,1);
-            booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022,1);
-            booksController.createGuide(4, "guide", "A", "B", "C", 2022,1);
-            booksController.createScience(5, "science", "A", "B", "C", 2022,1);
+            booksController.createAlbum(1, "album", "A", "B", "C", 2022,1,"");
+            booksController.createComic(2, "comics", "A", "B", "C", 2022,1,"");
+            booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022,1,"");
+            booksController.createGuide(4, "guide", "A", "B", "C", 2022,1,"");
+            booksController.createScience(5, "science", "A", "B", "C", 2022,1,"");
 
             if(!type.equals("exit")&&!type.equals("help")) {
                 try{
-                    dbService.init();
+
                     booksController.getBook(idType);
                     booksController.getBook(idType).info();
                     ResultSet resultSet = dbService.query("SELECT MAX(id) FROM `books`;");

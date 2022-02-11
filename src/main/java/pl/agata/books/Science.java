@@ -7,8 +7,8 @@ public class Science extends Book{
 
     private int numberOfPages;
 
-    public Science(int id,String type, String author, String title, String publisher, int publicationDate,int quantity) {
-        super(id, type, author, title, publisher, publicationDate,quantity);
+    public Science(int id,String type, String author, String title, String publisher, int publicationDate,int quantity,String description) {
+        super(id, type, author, title, publisher, publicationDate,quantity,description);
     }
 
     public void setNumberOfPages(int numberOfPages) {
@@ -43,13 +43,13 @@ public class Science extends Book{
 
     @Override
     public String addToBase(){
-        String string = "INSERT INTO books (`id`, `type`, `title`, `author`, `publisher`, `publication_year`,`pages`, `quantity` ) " +
-                "VALUES('"+id+"','"+type+"','"+title+"','"+author+"','"+publisher+"',"+publicationDate+","+numberOfPages+","+quantity+");";
+        String string = "INSERT INTO books (`id`, `type`, `title`, `author`, `publisher`, `publication_year`,`pages`, `quantity`,`description` ) " +
+                "VALUES('"+id+"','"+type+"','"+title+"','"+author+"','"+publisher+"',"+publicationDate+","+numberOfPages+","+quantity+",'"+description+"');";
         return string;
     }
 
     @Override
-    public void setInformation(int id, String type, String author, String title, String publisher, int publicationDate,int pages,int quantity){
+    public void setInformation(int id, String type, String author, String title, String publisher, int publicationDate,int pages,int quantity, String description){
         this.id = id;
         this.author = author;
         this.title = title;
@@ -57,6 +57,7 @@ public class Science extends Book{
         this.type = type;
         this.publicationDate = publicationDate;
         this.quantity = quantity;
+        this.description = description;
         setNumberOfPages(pages);
     }
 

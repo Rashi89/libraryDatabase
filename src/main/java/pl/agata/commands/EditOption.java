@@ -37,7 +37,7 @@ public class EditOption extends Command {
         publicationDate = scanner.nextInt();
 
         int idType = 0;
-        dbService.init();
+
         ResultSet resultSet = dbService.query("SELECT COUNT(title),id,type FROM `books` WHERE title ='"+title+"' " +
                 "AND author='"+author+"' AND publication_year="+publicationDate+";");
         while(resultSet.next()){
@@ -48,11 +48,11 @@ public class EditOption extends Command {
                 break;
             }
             else {
-                booksController.createAlbum(1, "album", "A", "B", "C", 2022,1);
-                booksController.createComic(2, "comics", "A", "B", "C", 2022,1);
-                booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022,1);
-                booksController.createGuide(4, "guide", "A", "B", "C", 2022,1);
-                booksController.createScience(5, "science", "A", "B", "C", 2022,1);
+                booksController.createAlbum(1, "album", "A", "B", "C", 2022,1,"");
+                booksController.createComic(2, "comics", "A", "B", "C", 2022,1,"");
+                booksController.createFairystyle(3, "fairytale", "A", "B", "C", 2022,1,"");
+                booksController.createGuide(4, "guide", "A", "B", "C", 2022,1,"");
+                booksController.createScience(5, "science", "A", "B", "C", 2022,1,"");
                 id = resultSet.getInt("id");
                 type = resultSet.getString("type");
                 idType = convertTypeToInt(type);

@@ -3,13 +3,12 @@ package pl.agata.user;
 public class User {
     private int id;
     private String name;
-    private String username;
+    private String surname;
     private String password;
 
-    public User(String name, String username, String password) {
-        this.id = id;
+    public User(String name, String surname, String password) {
         this.name = name;
-        this.username = username;
+        this.surname = surname;
         this.password = password;
     }
 
@@ -29,12 +28,12 @@ public class User {
         this.name = name;
     }
 
-    public String getUsername() {
-        return username;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getPassword() {
@@ -50,7 +49,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", username='" + username + '\'' +
+                ", username='" + surname + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

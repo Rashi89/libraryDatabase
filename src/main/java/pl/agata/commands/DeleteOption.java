@@ -26,7 +26,7 @@ public class DeleteOption extends Command {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj tytuł książki do usunięcia: ");
         title = scanner.nextLine();
-        dbService.init();
+
         ResultSet resultSet = dbService.query("SELECT COUNT(title) FROM `books` WHERE title ='"+title+"';");
         while(resultSet.next()){
             quantity = resultSet.getInt("COUNT(title)");
