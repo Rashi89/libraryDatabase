@@ -1,8 +1,8 @@
 package pl.agata.books;
 
 public class Fairytales extends Book{
-    public Fairytales(int id, String type, String author, String title, String publisher, int publicationDate) {
-        super(id, type, author, title, publisher, publicationDate);
+    public Fairytales(int id, String type, String author, String title, String publisher, int publicationDate,int quantity,String description) {
+        super(id, type, author, title, publisher, publicationDate,quantity,description);
     }
 
     @Override

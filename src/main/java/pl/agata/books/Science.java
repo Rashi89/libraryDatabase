@@ -7,8 +7,8 @@ public class Science extends Book{
 
     private int numberOfPages;
 
-    public Science(int id,String type, String author, String title, String publisher, int publicationDate) {
-        super(id, type, author, title, publisher, publicationDate);
+    public Science(int id,String type, String author, String title, String publisher, int publicationDate,int quantity,String description) {
+        super(id, type, author, title, publisher, publicationDate,quantity,description);
     }
 
     public void setNumberOfPages(int numberOfPages) {
@@ -42,13 +42,35 @@ public class Science extends Book{
     }
 
     @Override
+    public String addToBase(){
+        String string = "INSERT INTO books (`id`, `type`, `title`, `author`, `publisher`, `publication_year`,`pages`, `quantity`,`description` ) " +
+                "VALUES('"+id+"','"+type+"','"+title+"','"+author+"','"+publisher+"',"+publicationDate+","+numberOfPages+","+quantity+",'"+description+"');";
+        return string;
+    }
+
+    @Override
+    public void setInformation(int id, String type, String author, String title, String publisher, int publicationDate,int pages,int quantity, String description){
+        this.id = id;
+        this.author = author;
+        this.title = title;
+        this.publisher = publisher;
+        this.type = type;
+        this.publicationDate = publicationDate;
+        this.quantity = quantity;
+        this.description = description;
+        setNumberOfPages(pages);
+    }
+
+    @Override
     public String toString() {
         return "Science{" +
                 "id=" + id +
+                ", type='" + type + '\'' +
                 ", author='" + author + '\'' +
                 ", title='" + title + '\'' +
                 ", publisher='" + publisher + '\'' +
-                ", publicationDate=" + publicationDate +
+                ", publicationDate=" + publicationDate +'\''+
+                ", quantity=" + quantity +'\''+
                 ", numberOfPages=" + numberOfPages +
                 '}';
     }

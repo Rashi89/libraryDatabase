@@ -1,12 +1,14 @@
 package pl.agata.commands;
 
+import pl.agata.service.DBService;
+
 public class HelpBooks extends Command {
     public HelpBooks() {
         super("help");
     }
 
     @Override
-    public void execute() {
+    public void execute(DBService dbService) {
         System.out.println("Wpisz 'Album', by dodać nowy album;");
         System.out.println("Wpisz 'Comics', by dodac nowy komiks;");
         System.out.println("Wpisz 'Science', by dodać nową pozycję popularnonaukową;");

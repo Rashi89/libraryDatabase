@@ -1,6 +1,7 @@
 package pl.agata.controller;
 
 import pl.agata.commands.*;
+import pl.agata.service.DBService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +9,10 @@ import java.util.List;
 public class CommandController {
 
     private final List<Command> commands;
+    private DBService dbService;
 
-    public CommandController() {
+    public CommandController(DBService dbService) {
+        this.dbService = dbService;
         this.commands = new ArrayList<>();
     }
 
