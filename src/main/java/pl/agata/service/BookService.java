@@ -81,7 +81,39 @@ public class BookService {
         return book;
     }
 
-
+    public List<Book> getBooksLimit(int limit) throws SQLException {
+        int id =0;
+        int idType = 0;
+        String type = "";
+        String title = "";
+        String publisher = "";
+        String author="";
+        int publication_year = 0;
+        int pages = 0;
+        int quantity = 0;
+        int bookQuantity =0;
+        String description ="";
+        int quantityOffset = 12;
+        books.clear();
+        ResultSet resultSet = dbService.query("SELECT * FROM `books` b LIMIT 12 OFFSET "+quantityOffset*limit);
+        while(resultSet.next()){
+            id = resultSet.getInt("id");
+            type = resultSet.getString("type");
+            title = resultSet.getString("title");
+            publisher = resultSet.getString("publisher");
+            publication_year = resultSet.getInt("publication_year");
+            pages = resultSet.getInt("pages");
+            bookQuantity = resultSet.getInt("quantity");
+            author = resultSet.getString("author");
+            description =resultSet.getString("description");
+            idType = convertTypeToInt(type);
+            book = new Book();
+            book.setInformation(id,type,author,title,publisher,publication_year,pages,bookQuantity,description);
+            this.books.add(book);
+        }
+        dbService.closeStatement();
+        return books;
+    }
 
     public List<Book> addBook() throws SQLException {
         int id =0;
@@ -116,7 +148,39 @@ public class BookService {
         return books;
     }
 
-    public List<Book> searchBook(String str) throws SQLException {
+    public int quantityPagesAllBook() throws SQLException {
+        int quantity = 0;
+        int licznik = 1;
+        ResultSet resultSet = dbService.query("SELECT COUNT(*) FROM `books` b");
+        while(resultSet.next()){
+            quantity = resultSet.getInt("COUNT(*)");
+        }
+        dbService.closeStatement();
+        while(quantity-12>0)
+        {
+            licznik = licznik+1;
+            quantity = quantity-12;
+        }
+        return licznik;
+    }
+
+    public int quantityPagesSearchBook(String str) throws SQLException {
+        int quantity = 0;
+        int licznik = 1;
+        ResultSet resultSet = dbService.query("SELECT COUNT(*) FROM `books` b WHERE b.title LIKE '%"+str+"%'");
+        while(resultSet.next()){
+            quantity = resultSet.getInt("COUNT(*)");
+        }
+        dbService.closeStatement();
+        while(quantity-12>0)
+        {
+            licznik = licznik+1;
+            quantity = quantity-12;
+        }
+        return licznik;
+    }
+
+    public List<Book> searchBook(String str,int limit) throws SQLException {
         int id =0;
         int idType = 0;
         String type = "";
@@ -128,8 +192,9 @@ public class BookService {
         int quantity = 0;
         int bookQuantity =0;
         String description ="";
+        int quantityOffset = 12;
 
-        ResultSet resultSet = dbService.query("SELECT * FROM `books` b WHERE b.title LIKE '%"+str+"%'");
+        ResultSet resultSet = dbService.query("SELECT * FROM `books` b WHERE b.title LIKE '%"+str+"%' LIMIT 12 OFFSET "+quantityOffset*limit);
         while(resultSet.next()){
             id = resultSet.getInt("id");
             type = resultSet.getString("type");
