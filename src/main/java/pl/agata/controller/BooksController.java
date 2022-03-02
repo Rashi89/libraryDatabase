@@ -1,10 +1,6 @@
 package pl.agata.controller;
 
 import pl.agata.books.*;
-import pl.agata.service.DBService;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

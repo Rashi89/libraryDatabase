@@ -3,7 +3,6 @@ package pl.agata.service;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import pl.agata.controller.BooksController;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,14 +32,11 @@ public class DBService {
         config.addDataSourceProperty( "prepStmtCacheSize" , "250" );
         config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
         this.ds = new HikariDataSource( config );
-        //getConnection();
-//        init();
     }
 
     private Connection getConnection() throws SQLException {
         return this.ds.getConnection();
     }
-
 
     public ResultSet query(String sql) {
         try{

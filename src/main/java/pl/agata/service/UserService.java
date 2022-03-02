@@ -31,13 +31,6 @@ public class UserService {
     }
 
     public User createUser(String name,String surname, String pass) throws SQLException, NoSuchAlgorithmException {
-//        System.out.println("Podaj imie!");
-//        Scanner scanner = new Scanner(System.in);
-//        name = scanner.nextLine();
-//        System.out.println("Podaj nazwisko!");
-//        surname = scanner.nextLine();
-//        System.out.println("Podaj password!");
-//        pass = scanner.nextLine();
         hash = new Hash();
         String passHash = hash.toHexString(hash.getSHA(pass));
         user = new User(name,surname,passHash);
@@ -73,14 +66,6 @@ public class UserService {
     }
 
     public User loginUser(String name, String surname, String pass) throws SQLException, NoSuchAlgorithmException {
-//        System.out.println("Podaj imie!");
-//        Scanner scanner = new Scanner(System.in);
-//        name = scanner.nextLine();
-//        System.out.println("Podaj nazwisko!");
-//        surname = scanner.nextLine();
-//        System.out.println("Podaj password!");
-//        pass = scanner.nextLine();
-
         int id=0;
         hash = new Hash();
         String passHash = hash.toHexString(hash.getSHA(pass));
@@ -98,12 +83,9 @@ public class UserService {
             return user;
         }
         else {
-            //dbService.closeStatement();
             System.out.println("Błędny login lub hasło!");
             return null;
         }
-        //return null;
-
     }
 
     public User getLoginedUser(){

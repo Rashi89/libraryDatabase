@@ -21,8 +21,6 @@ public class CreateOption extends Command {
     public void execute(DBService dbService) throws SQLException {
         boolean run = true;
         while (run) {
-//            DBService dbService = new DBService();
-            //dbService.init();
             Scanner scanner = new Scanner(System.in);
             System.out.print("Podaj typ książki: ");
             type = scanner.nextLine().toLowerCase(Locale.ROOT);
@@ -39,7 +37,6 @@ public class CreateOption extends Command {
 
             if(!type.equals("exit")&&!type.equals("help")) {
                 try{
-
                     booksController.getBook(idType);
                     booksController.getBook(idType).info();
                     ResultSet resultSet = dbService.query("SELECT MAX(id) FROM `books`;");
@@ -69,23 +66,6 @@ public class CreateOption extends Command {
             else if(type.equals("exit")){
                 run = false;
             }
-        }
-    }
-
-    private int convertTypeToInt(String type){
-        switch(type){
-            case "album":
-                return 1;
-            case "comics":
-                return 2;
-            case "fairytale":
-                return 3;
-            case "guide":
-                return 4;
-            case "science":
-                return 5;
-            default:
-                return 0;
         }
     }
 }

@@ -1,9 +1,8 @@
 package pl.agata.service;
 
-import com.google.protobuf.NullValue;
+
 import pl.agata.basket.Basket;
 import pl.agata.books.Book;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -15,34 +14,27 @@ public class BasketService {
     private DBService dbService;
     private List<Book> books;
     private Basket basket;
-    private int id;
-    private int idBook;
+    int id = 0;
+    int idType = 0;
+    String type = "";
+    String title = "";
+    String publisher = "";
+    String author = "";
+    String description = "";
+    int publication_year = 0;
+    int pages = 0;
+    int quantity = 0;
+    int bookQuantity = 0;
 
     public BasketService(DBService dbService) {
         this.dbService = dbService;
         this.books = new ArrayList<>();
-
     }
 
-
     public List<Book> addBookToBasket(int idUser,int idBook) throws SQLException {
-        int id =0;
-        int idType = 0;
-        String type = "";
-        String title = "";
-        String publisher = "";
-        String author="";
-        String description="";
-
-        int publication_year = 0;
-        int pages = 0;
-        int quantity = 0;
-        int bookQuantity =0;
         this.basket = new Basket(idBook,idUser);
-        //System.out.println("INSERT INTO book_orders ('id','id_basket','id_book') VALUES (NULL,"+basket.getIdUser()+","+basket.getIdBook()+");");
 
         dbService.dml("INSERT INTO `book_orders` (`id`,`id_basket`,`id_book`) VALUES (NULL,"+basket.getIdUser()+","+basket.getIdBook()+");");
-
 
             ResultSet result = dbService.query("SELECT b.id,b.type,b.title,b.author,b.publisher,b.publication_year,b.pages,b.quantity,b.description FROM `book_orders` bo INNER JOIN `books` b ON bo.id_book = b.id INNER JOIN `baskets` ba ON ba.id = bo.id_basket INNER JOIN `users` u ON u.id=ba.id_user WHERE u.id="+idUser);
             while (result.next()) {
@@ -66,18 +58,6 @@ public class BasketService {
     }
 
     public List<Book> getBasket(int idUser) throws SQLException {
-        int id =0;
-        int idType = 0;
-        String type = "";
-        String title = "";
-        String publisher = "";
-        String author="";
-        String description="";
-
-        int publication_year = 0;
-        int pages = 0;
-        int quantity = 0;
-        int bookQuantity =0;
         ResultSet result = dbService.query("SELECT b.id,b.type,b.title,b.author,b.publisher,b.publication_year,b.pages,b.quantity,b.description FROM `book_orders` bo INNER JOIN `books` b ON bo.id_book = b.id INNER JOIN `baskets` ba ON ba.id = bo.id_basket INNER JOIN `users` u ON u.id=ba.id_user WHERE u.id="+idUser);
         while (result.next()) {
             id = result.getInt("id");
@@ -131,6 +111,7 @@ public class BasketService {
         dbService.closeStatement();
 
     }
+
     private int convertTypeToInt(String type){
         switch(type){
             case "album":

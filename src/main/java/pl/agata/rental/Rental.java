@@ -3,6 +3,19 @@ package pl.agata.rental;
 import java.util.Date;
 
 public class Rental {
+
+    private String title;
+    private String author;
+    private Date startDate;
+    private Date endDate;
+
+    public Rental(String title, String author, Date startDate, Date endDate) {
+        this.title = title;
+        this.author = author;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -34,16 +47,4 @@ public class Rental {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
-    public Rental(String title, String author, Date startDate, Date endDate) {
-        this.title = title;
-        this.author = author;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
-    private String title;
-    private String author;
-    private Date startDate;
-    private Date endDate;
 }

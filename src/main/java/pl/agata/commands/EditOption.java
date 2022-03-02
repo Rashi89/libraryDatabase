@@ -19,12 +19,9 @@ public class EditOption extends Command {
 
     @Override
     public void execute(DBService dbService) throws SQLException {
-//        DBService dbService = new DBService();
-//        dbService.init();
         int id =0;
         String type="";
         BooksController booksController = new BooksController();
-
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj tytuł książki którą chcesz edytować: ");
@@ -63,22 +60,5 @@ public class EditOption extends Command {
         }
         dbService.dml(booksController.getBook(id).updateToBase());
         System.out.println();
-    }
-
-    private int convertTypeToInt(String type){
-        switch(type){
-            case "album":
-                return 1;
-            case "comics":
-                return 2;
-            case "fairytale":
-                return 3;
-            case "guide":
-                return 4;
-            case "science":
-                return 5;
-            default:
-                return 0;
-        }
     }
 }

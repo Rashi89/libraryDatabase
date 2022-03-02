@@ -18,4 +18,21 @@ public abstract class Command {
     public String getNameOption() {
         return nameOption;
     }
+
+    public int convertTypeToInt(String type){
+        switch(type){
+            case "album":
+                return 1;
+            case "comics":
+                return 2;
+            case "fairytale":
+                return 3;
+            case "guide":
+                return 4;
+            case "science":
+                return 5;
+            default:
+                return 0;
+        }
+    }
 }

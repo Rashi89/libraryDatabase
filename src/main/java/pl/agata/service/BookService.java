@@ -1,13 +1,9 @@
 package pl.agata.service;
 
 import pl.agata.books.Book;
-import pl.agata.rental.Rental;
-import pl.agata.user.User;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class BookService {
@@ -15,6 +11,17 @@ public class BookService {
     private Book book;
     private DBService dbService;
     private List<Book> books;
+    int idType = 0;
+    String type = "";
+    String title = "";
+    String publisher = "";
+    String author="";
+    int publication_year = 0;
+    int pages = 0;
+    int quantity = 0;
+    int bookQuantity =0;
+    String description ="";
+    int id =0;
 
     public BookService(DBService dbService) {
         this.dbService = dbService;
@@ -47,20 +54,9 @@ public class BookService {
             }
         }
         dbService.closeStatement();
-
     }
 
     public Book getBookInformationById(int id) throws SQLException {
-        int idType = 0;
-        String type = "";
-        String title = "";
-        String publisher = "";
-        String author="";
-        int publication_year = 0;
-        int pages = 0;
-        int quantity = 0;
-        int bookQuantity =0;
-        String description ="";
 
         ResultSet resultSet = dbService.query("SELECT * FROM `books` b WHERE b.id="+id);
         while(resultSet.next()){
@@ -82,17 +78,8 @@ public class BookService {
     }
 
     public List<Book> getBooksLimit(int limit) throws SQLException {
-        int id =0;
-        int idType = 0;
-        String type = "";
-        String title = "";
-        String publisher = "";
-        String author="";
-        int publication_year = 0;
-        int pages = 0;
-        int quantity = 0;
-        int bookQuantity =0;
-        String description ="";
+
+
         int quantityOffset = 12;
         books.clear();
         ResultSet resultSet = dbService.query("SELECT * FROM `books` b LIMIT 12 OFFSET "+quantityOffset*limit);
@@ -116,17 +103,6 @@ public class BookService {
     }
 
     public List<Book> addBook() throws SQLException {
-        int id =0;
-        int idType = 0;
-        String type = "";
-        String title = "";
-        String publisher = "";
-        String author="";
-        int publication_year = 0;
-        int pages = 0;
-        int quantity = 0;
-        int bookQuantity =0;
-        String description ="";
         books.clear();
         ResultSet resultSet = dbService.query("SELECT * FROM `books` b");
         while(resultSet.next()){
@@ -149,7 +125,6 @@ public class BookService {
     }
 
     public int quantityPagesAllBook() throws SQLException {
-        int quantity = 0;
         int licznik = 1;
         ResultSet resultSet = dbService.query("SELECT COUNT(*) FROM `books` b");
         while(resultSet.next()){
@@ -165,7 +140,6 @@ public class BookService {
     }
 
     public int quantityPagesSearchBook(String str) throws SQLException {
-        int quantity = 0;
         int licznik = 1;
         ResultSet resultSet = dbService.query("SELECT COUNT(*) FROM `books` b WHERE b.title LIKE '%"+str+"%'");
         while(resultSet.next()){
@@ -181,17 +155,6 @@ public class BookService {
     }
 
     public List<Book> searchBook(String str,int limit) throws SQLException {
-        int id =0;
-        int idType = 0;
-        String type = "";
-        String title = "";
-        String publisher = "";
-        String author="";
-        int publication_year = 0;
-        int pages = 0;
-        int quantity = 0;
-        int bookQuantity =0;
-        String description ="";
         int quantityOffset = 12;
 
         ResultSet resultSet = dbService.query("SELECT * FROM `books` b WHERE b.title LIKE '%"+str+"%' LIMIT 12 OFFSET "+quantityOffset*limit);

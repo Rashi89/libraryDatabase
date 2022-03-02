@@ -15,35 +15,6 @@ public class Book {
     protected String description;
 
     public Book(){
-
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public static int getPublicationDate() {
-        return publicationDate;
-    }
-
-    public int getQuantity() {
-        return quantity;
     }
 
     protected Book(int id, String type, String author, String title, String publisher, int publicationDate, int quantity, String description) {
@@ -71,6 +42,9 @@ public class Book {
         setPublisher(scanner.nextLine());
         validateQuantityBook();
         validatePublicationDate();
+        System.out.print("Podaj krótki opis książki: ");
+        setDescription(scanner.nextLine());
+
     }
 
     public String addToBase(){
@@ -154,6 +128,34 @@ public class Book {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public static int getPublicationDate() {
+        return publicationDate;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public void setInformation(int id, String type, String author, String title, String publisher, int publicationDate, int pages, int quantity, String description){

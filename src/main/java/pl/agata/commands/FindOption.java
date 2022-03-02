@@ -17,8 +17,6 @@ public class FindOption extends Command {
     @Override
     public void execute(DBService dbService) throws SQLException {
         BooksController booksController = new BooksController();
-//        DBService dbService = new DBService();
-//        dbService.init();
         int id =0;
         int idType = 0;
         String type = "";
@@ -29,8 +27,6 @@ public class FindOption extends Command {
         int quantity = 0;
         int bookQuantity =0;
         String description ="";
-
-//        dbService.select();//dadaj do repozytorium to jedyna zmiana
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj autora: ");
@@ -45,11 +41,9 @@ public class FindOption extends Command {
                 break;
             }
         }
-        //resultSet.close();
         if(quantity!=0)
              {
-
-                ResultSet resultSetInfo = dbService.query("SELECT id, type, title, publisher, publication_year, pages,quantity FROM `books` WHERE author ='"+option+"';");
+                ResultSet resultSetInfo = dbService.query("SELECT id, type, title, publisher, publication_year, pages,quantity,description FROM `books` WHERE author ='"+option+"';");
                 while(resultSetInfo.next()){
                     booksController.createAlbum(1, "album", "A", "B", "C", 2022,1,"");
                     booksController.createComic(2, "comics", "A", "B", "C", 2022,1,"");
@@ -69,25 +63,8 @@ public class FindOption extends Command {
 
                     booksController.getBook(idType).setInformation(id,type,option,title,publisher,publication_year,pages,bookQuantity,description);
                     System.out.println(booksController.getBook(id).toString());
-
                 }
             }
         System.out.println();
-    }
-    private int convertTypeToInt(String type){
-        switch(type){
-            case "album":
-                return 1;
-            case "comics":
-                return 2;
-            case "fairytale":
-                return 3;
-            case "guide":
-                return 4;
-            case "science":
-                return 5;
-            default:
-                return 0;
-        }
     }
 }
